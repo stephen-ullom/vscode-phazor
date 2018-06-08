@@ -1,0 +1,77 @@
+{
+    "HTML template": {
+        "prefix": "html",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html>",
+            "<head>",
+            "\t<title>${1:Page Title}</title>",
+            "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"${2:main.css}\" />",
+            "\t<script src=\"${3:main.js}\"></script>",
+            "</head>",
+            "<body>",
+            "\t$0",
+            "</body>",
+            "</html>"
+        ],
+        "description": "Simple HTML5 starting point"
+    },
+    "Phazor for": {
+        "prefix": "$for",
+        "body": [
+            "\\$for (${1:\\$index} = 0; ${1:\\$index} < count(${2:\\$array}); ${1:\\$index}++) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "for: \n Code snippet for for statement"
+    },
+    "Phazor foreach": {
+        "prefix": "$foreach",
+        "body": [
+            "\\$foreach (${1:\\$array} as ${2:\\$item}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "foreach: \n Code snippet for foreach statement"
+    },
+    "Phazor if": {
+        "prefix": "$if",
+        "body": [
+            "\\$if ($1) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "if: \n Code snippet for if statement"
+    },
+    "Phazor if else": {
+        "prefix": "$ifelse",
+        "body": [
+            "\\$if ($1) {",
+            "\t$2",
+            "} else {",
+            "\t$0",
+            "}"
+        ],
+        "description": "if: \n Code snippet for if else statement"
+    },
+    "Phazor try": {
+        "prefix": "$try",
+        "body": [
+            "\\$try {",
+            "\t$1",
+            "} catch (Exception ${2:\\$exception}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "try catch: \n Code snippet for try catch statement"
+    },
+    "Phazor while": {
+        "prefix": "$while",
+        "body": [
+            "\\$while ($1) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "while: \n Code snippet for while statement"
+    }
+}

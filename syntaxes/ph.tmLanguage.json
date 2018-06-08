@@ -1,0 +1,379 @@
+{
+    "scopeName": "text.html.ph",
+    "injections": {
+        "text.html.ph - (meta.embedded | meta.tag), L:text.html.ph meta.tag, L:text.html.ph source.js": {
+            "patterns": [{
+                "include": "#implicit-phazor-expression"
+            }]
+        }
+    },
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#phazor-directives"
+        },
+        {
+            "include": "#phazor-code-block"
+        },
+        {
+            "include": "#phazor-catch"
+        },
+        {
+            "include": "#phazor-for"
+        },
+        {
+            "include": "#phazor-foreach"
+        },
+        {
+            "include": "#phazor-function"
+        },
+        {
+            "include": "#phazor-if"
+        },
+        {
+            "include": "#phazor-else"
+        },
+        {
+            "include": "#phazor-else-if"
+        },
+        {
+            "include": "#phazor-switch"
+        },
+        {
+            "include": "#phazor-while"
+        },
+        {
+            "include": "#phazor-open-bracket"
+        },
+        {
+            "include": "#phazor-close-bracket"
+        },
+        {
+            "include": "#explicit-phazor-expression"
+        },
+        {
+            "include": "#implicit-phazor-expression"
+        },
+        {
+            "include": "#phazor-escape-entity"
+        },
+        {
+            "include": "text.html.basic"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "begin": "\\$\\*",
+            "captures": {
+                "0": {
+                    "name": "punctuation.definition.comment.source.ph"
+                }
+            },
+            "end": "\\*\\$",
+            "name": "comment.block.ph"
+        },
+        "phazor-directives": {
+            "name": "meta.directive.ph",
+            "patterns": [{
+                    "include": "#using-directive"
+                },
+                {
+                    "include": "#model-directive"
+                },
+                {
+                    "include": "#inherits-directive"
+                },
+                {
+                    "include": "#inject-directive"
+                },
+                {
+                    "include": "#implements-directive"
+                },
+                {
+                    "include": "#layout-directive"
+                }
+            ]
+        },
+        "explicit-phazor-expression": {
+            "name": "meta.expression.explicit.ph",
+            "begin": "(\\$)\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "implicit-phazor-expression": {
+            "name": "meta.expression.implicit.ph",
+            "match": "(?<!\\$)(\\$)(\\w+)",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            }
+        },
+        "using-directive": {
+            "name": "meta.directive.using.ph",
+            "begin": "(\\$)(?=using)(.*)",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                },
+                "2": {
+                    "patterns": [{
+                        "include": "source.php"
+                    }]
+                }
+            },
+            "end": "(?=$)"
+        },
+        "model-directive": {
+            "name": "meta.directive.model.ph",
+            "begin": "(\\$model)\\s+",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "#php-type-name"
+            }],
+            "end": "$"
+        },
+        "inherits-directive": {
+            "name": "meta.directive.inherits.ph",
+            "begin": "(\\$inherits)\\s+",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "#php-type-name"
+            }],
+            "end": "$"
+        },
+        "inject-directive": {
+            "name": "meta.directive.inject.ph",
+            "begin": "(\\$inject)\\s+",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "#php-type-name"
+            }],
+            "end": "$"
+        },
+        "implements-directive": {
+            "name": "meta.directive.implements.ph",
+            "begin": "(\\$implements)\\s+",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "#php-type-name"
+            }],
+            "end": "$"
+        },
+        "layout-directive": {
+            "name": "meta.directive.layout.ph",
+            "begin": "(\\$layout)\\s+",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "#php-type-name"
+            }],
+            "end": "$"
+        },
+        "phazor-escape-entity": {
+            "match": "\\$\\$",
+            "name": "constant.character.entity.html"
+        },
+        "phazor-open-bracket": {
+            "match": "\\{",
+            "name": "keyword.control.ph"
+        },
+        "phazor-close-bracket": {
+            "match": "\\}",
+            "name": "keyword.control.ph"
+        },
+        "phazor-catch": {
+            "begin": "(catch)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-for": {
+            "begin": "(\\$for)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)\\s?{"
+        },
+        "phazor-foreach": {
+            "begin": "(\\$foreach)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-function": {
+            "begin": "(\\$function)\\s(\\w+)\\s?(\\()",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                },
+                "1": {
+                    "name": "keyword.control.ph"
+                },
+                "2": {
+                    "name": "keyword.function.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-if": {
+            "begin": "(\\$if)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-else": {
+            "match": "\\}\\s*else\\s*\\{",
+            "name": "keyword.control.ph"
+        },
+        "phazor-else-if": {
+            "begin": "(else\\sif)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-switch": {
+            "begin": "(\\$switch)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-while": {
+            "begin": "(\\$while)\\s*\\(",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                "include": "source.php"
+            }],
+            "end": "\\)"
+        },
+        "phazor-code-block": {
+            "begin": "\\$\\{",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
+                }
+            },
+            "patterns": [{
+                    "include": "source.php"
+                }
+            ],
+            "end": "\\}"
+        },
+        "php-namespace-identifier": {
+            "patterns": [{
+                "name": "entity.name.type.namespace.php",
+                "match": "[_[:alpha:]][_[:alnum:]]*"
+            }]
+        },
+        "php-type-name": {
+            "patterns": [{
+                    "match": "([_[:alpha:]][_[:alnum:]]*)\\s*(\\:\\:)",
+                    "captures": {
+                        "1": {
+                            "name": "entity.name.type.alias.php"
+                        },
+                        "2": {
+                            "name": "punctuation.separator.coloncolon.php"
+                        }
+                    }
+                },
+                {
+                    "match": "([_[:alpha:]][_[:alnum:]]*)\\s*(\\.)",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.php"
+                        },
+                        "2": {
+                            "name": "punctuation.accessor.php"
+                        }
+                    }
+                },
+                {
+                    "match": "(\\.)\\s*([_[:alpha:]][_[:alnum:]]*)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.accessor.php"
+                        },
+                        "2": {
+                            "name": "storage.type.php"
+                        }
+                    }
+                },
+                {
+                    "name": "storage.type.php",
+                    "match": "[_[:alpha:]][_[:alnum:]]*"
+                }
+            ]
+        }
+    }
+}
