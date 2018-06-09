@@ -1,12 +1,22 @@
 {
     "name": "phazor",
-    "displayName": "Phazor Web Pages",
+    "displayName": "Phazor",
     "description": "A quicker PHP syntax similar to Razor Web Pages.",
     "version": "0.1.0",
     "publisher": "slulego",
     "engines": {
         "vscode": "0.10.x"
     },
+    "categories": ["Programming Languages", "Snippets"],
+    "repository": {
+		"type": "git",
+		"url": "https://github.com/slulego/vscode-phazor.git"
+	},
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#e8e030",
+		"theme": "light"
+	},
     "scripts": {
         "update-grammar": "node ../../build/npm/update-grammar.js demyte/language-cshtml grammars/cshtml.json ./syntaxes/ph.tmLanguage.json"
     },
