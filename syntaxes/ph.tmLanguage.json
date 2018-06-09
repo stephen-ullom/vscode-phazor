@@ -12,10 +12,16 @@
             "include": "#comments"
         },
         {
-            "include": "#phazor-directives"
+            "include": "#phazor-code-block"
         },
         {
-            "include": "#phazor-code-block"
+            "include": "#phazor-open-bracket"
+        },
+        {
+            "include": "#phazor-close-bracket"
+        },
+        {
+            "include": "#phazor-escape-entity"
         },
         {
             "include": "#phazor-catch"
@@ -45,19 +51,10 @@
             "include": "#phazor-while"
         },
         {
-            "include": "#phazor-open-bracket"
-        },
-        {
-            "include": "#phazor-close-bracket"
-        },
-        {
             "include": "#explicit-phazor-expression"
         },
         {
             "include": "#implicit-phazor-expression"
-        },
-        {
-            "include": "#phazor-escape-entity"
         },
         {
             "include": "text.html.basic"
@@ -74,27 +71,18 @@
             "end": "\\*\\$",
             "name": "comment.block.ph"
         },
-        "phazor-directives": {
-            "name": "meta.directive.ph",
-            "patterns": [{
-                    "include": "#using-directive"
-                },
-                {
-                    "include": "#model-directive"
-                },
-                {
-                    "include": "#inherits-directive"
-                },
-                {
-                    "include": "#inject-directive"
-                },
-                {
-                    "include": "#implements-directive"
-                },
-                {
-                    "include": "#layout-directive"
+        "phazor-code-block": {
+            "begin": "\\$\\{",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.ph"
                 }
-            ]
+            },
+            "patterns": [{
+                    "include": "source.php"
+                }
+            ],
+            "end": "\\}"
         },
         "explicit-phazor-expression": {
             "name": "meta.expression.explicit.ph",
@@ -118,90 +106,6 @@
                 }
             }
         },
-        "using-directive": {
-            "name": "meta.directive.using.ph",
-            "begin": "(\\$)(?=using)(.*)",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                },
-                "2": {
-                    "patterns": [{
-                        "include": "source.php"
-                    }]
-                }
-            },
-            "end": "(?=$)"
-        },
-        "model-directive": {
-            "name": "meta.directive.model.ph",
-            "begin": "(\\$model)\\s+",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                }
-            },
-            "patterns": [{
-                "include": "#php-type-name"
-            }],
-            "end": "$"
-        },
-        "inherits-directive": {
-            "name": "meta.directive.inherits.ph",
-            "begin": "(\\$inherits)\\s+",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                }
-            },
-            "patterns": [{
-                "include": "#php-type-name"
-            }],
-            "end": "$"
-        },
-        "inject-directive": {
-            "name": "meta.directive.inject.ph",
-            "begin": "(\\$inject)\\s+",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                }
-            },
-            "patterns": [{
-                "include": "#php-type-name"
-            }],
-            "end": "$"
-        },
-        "implements-directive": {
-            "name": "meta.directive.implements.ph",
-            "begin": "(\\$implements)\\s+",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                }
-            },
-            "patterns": [{
-                "include": "#php-type-name"
-            }],
-            "end": "$"
-        },
-        "layout-directive": {
-            "name": "meta.directive.layout.ph",
-            "begin": "(\\$layout)\\s+",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                }
-            },
-            "patterns": [{
-                "include": "#php-type-name"
-            }],
-            "end": "$"
-        },
-        "phazor-escape-entity": {
-            "match": "\\$\\$",
-            "name": "constant.character.entity.html"
-        },
         "phazor-open-bracket": {
             "match": "\\{",
             "name": "keyword.control.ph"
@@ -209,6 +113,10 @@
         "phazor-close-bracket": {
             "match": "\\}",
             "name": "keyword.control.ph"
+        },
+        "phazor-escape-entity": {
+            "match": "\\$\\$",
+            "name": "constant.character.entity.html"
         },
         "phazor-catch": {
             "begin": "(catch)\\s*\\(",
@@ -315,65 +223,6 @@
                 "include": "source.php"
             }],
             "end": "\\)"
-        },
-        "phazor-code-block": {
-            "begin": "\\$\\{",
-            "captures": {
-                "0": {
-                    "name": "keyword.control.ph"
-                }
-            },
-            "patterns": [{
-                    "include": "source.php"
-                }
-            ],
-            "end": "\\}"
-        },
-        "php-namespace-identifier": {
-            "patterns": [{
-                "name": "entity.name.type.namespace.php",
-                "match": "[_[:alpha:]][_[:alnum:]]*"
-            }]
-        },
-        "php-type-name": {
-            "patterns": [{
-                    "match": "([_[:alpha:]][_[:alnum:]]*)\\s*(\\:\\:)",
-                    "captures": {
-                        "1": {
-                            "name": "entity.name.type.alias.php"
-                        },
-                        "2": {
-                            "name": "punctuation.separator.coloncolon.php"
-                        }
-                    }
-                },
-                {
-                    "match": "([_[:alpha:]][_[:alnum:]]*)\\s*(\\.)",
-                    "captures": {
-                        "1": {
-                            "name": "storage.type.php"
-                        },
-                        "2": {
-                            "name": "punctuation.accessor.php"
-                        }
-                    }
-                },
-                {
-                    "match": "(\\.)\\s*([_[:alpha:]][_[:alnum:]]*)",
-                    "captures": {
-                        "1": {
-                            "name": "punctuation.accessor.php"
-                        },
-                        "2": {
-                            "name": "storage.type.php"
-                        }
-                    }
-                },
-                {
-                    "name": "storage.type.php",
-                    "match": "[_[:alpha:]][_[:alnum:]]*"
-                }
-            ]
         }
     }
 }
