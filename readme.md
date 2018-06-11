@@ -1,16 +1,119 @@
 # Phazor
 
-Phazor Syntax Highlighting and Snippets
-
 A quicker PHP syntax similar to Razor Web Pages.
+
+```html
+<head>
+    ${
+        $title = "I love fruit";
+        $isFruit = true;
+    }
+    <title>$(ucwords($title))</title>
+</head>
+<body>
+    <h1>$title.</h1>
+    $if ($isFruit) {
+        <p>It sure is great!</p>
+    }
+</body>
+```
+
+Install Phazor with NPM ```npm i phazor -g```.
+
+Run the compiler "```phazor sourceFolder destinationFolder```" from the parent directory.
 
 [NPM Package](https://www.npmjs.com/package/phazor)
 
 [Github Repository](https://github.com/Slulego/Phazor)
 
+
+
+Add PHP code using the `$` symbol.
+
+## Code Blocks - `${ -php- }`
+
+```php
+${ $message = "I like fruit."; }
+```
+
+Compiles to:
+```php
+<?php $message = "I like fruit."; ?>
+```
+
+## Inline Expressions - `$variable`
+
+```html
+<p>$message</p>
+```
+
+Compiles to:
+```html
+<p><?php echo $message; ?></p>
+```
+
+For complex expressions use parenthesis - `$()`.
+
+```html
+<p>$($cost * 2)</p>
+```
+
+Compiles to:
+```html
+<p><?php echo $cost * 2; ?></p>
+```
+
+
+## Statements - `$statement ( -parameters- ) { -php- }`
+
+```html
+$if ($condition == true) {
+    <p>$message</p>
+}
+```
+
+Compiles to:
+```html
+<?php if ($condition == true) { ?>
+    <p><?php echo $message; ?></p>
+<?php } ?>
+```
+
+## Comments - `/* -comment- */`
+
+Comments work the same as multiline php comments.
+
+```html
+${
+    /* Set the price */
+    $cost = "$1.99";
+}
+<h1>Buy Fruit</h1>
+/* How much the fruit will cost */
+<p>That fruit will cost you $cost each.</p>
+```
+
+## Escape Entity - `$$`
+Escape "$" in HTML.
+
+```html
+<p>That fruit will cost you $$1.99 each.</p>
+```
+
+Compiles to:
+```html
+<p>That fruit will cost you $1.99 each.</p>
+```
+
+---
+
 ## Basic Example
 
-Create a **.ph** file.
+Install Phazor with NPM `npm i phazor -g`.
+
+Create a folder.
+
+Create a **.ph** file inside the folder:
 
 ```html
 <!DOCTYPE html>
@@ -49,11 +152,10 @@ Create a **.ph** file.
 </body>
 </html>
 ```
-Install Phazor with NPM ```npm install phazor -g```.
 
-Run the compiler "```phazor source-folder destination-folder```" from the parent directory.
+Run the compiler "```phazor sourceFolder destinationFolder```" from the parent directory.
 
-Phazor outputs the following **output/example.php**:
+Phazor outputs the following **.php** file into the destination folder:
 
 ```html
 <!DOCTYPE html>
@@ -104,3 +206,6 @@ Which renders in the browser:
 >- Grapes
 >
 >All these fruits together will cost $100.
+
+
+Todo: Escape brackets within quotes.
