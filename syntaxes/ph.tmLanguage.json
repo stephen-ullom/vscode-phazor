@@ -1,7 +1,7 @@
 {
     "scopeName": "text.html.ph",
     "injections": {
-        "text.html.ph - (meta.embedded | meta.tag), L:text.html.ph meta.tag, L:text.html.ph source.js": {
+        "text.html.basic - (meta.embedded | meta.tag), L:text.html.ph meta.tag, L:text.html.ph source.js": {
             "patterns": [{
                 "include": "#implicit-phazor-expression"
             }]
@@ -13,12 +13,6 @@
         },
         {
             "include": "#phazor-code-block"
-        },
-        {
-            "include": "#phazor-open-bracket"
-        },
-        {
-            "include": "#phazor-close-bracket"
         },
         {
             "include": "#phazor-escape-entity"
@@ -57,18 +51,24 @@
             "include": "#implicit-phazor-expression"
         },
         {
+            "include": "#phazor-open-bracket"
+        },
+        {
+            "include": "#phazor-close-bracket"
+        },
+        {
             "include": "text.html.basic"
         }
     ],
     "repository": {
         "comments": {
-            "begin": "\\$\\*",
+            "begin": "\\/\\*",
             "captures": {
                 "0": {
                     "name": "punctuation.definition.comment.source.ph"
                 }
             },
-            "end": "\\*\\$",
+            "end": "\\*\\/",
             "name": "comment.block.ph"
         },
         "phazor-code-block": {
