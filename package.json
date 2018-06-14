@@ -14,8 +14,8 @@
 	},
 	"icon": "icon.png",
 	"galleryBanner": {
-		"color": "#9B199B",
-		"theme": "light"
+		"color": "#111111",
+		"theme": "dark"
 	},
     "scripts": {
         "update-grammar": "node ../../build/npm/update-grammar.js demyte/language-cshtml grammars/cshtml.json ./syntaxes/ph.tmLanguage.json"
